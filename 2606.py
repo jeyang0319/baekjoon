@@ -1,32 +1,24 @@
 # 2606
 
 import sys
+sys.setrecursionlimit(10**6)
 
 n = int(sys.stdin.readline())
 m = int(sys.stdin.readline())
 
-network = {}
-visitied = [False] * (n+1)
+network = [[] for _ in range(n+1)]
+visited = [False] * (n+1)
 
 for _ in range(m):
     u, v = map(int, sys.stdin.readline().split())
-    if u in network:
-        network[u].append(v)
-    else:
-        network[u] = [v]
-        
-    if v in network:
-        network[v].append(u)
-    else:
-        network[v] = [u]
+    network[u].append(v)
+    network[v].append(u)
 
-def dfs(u):
-    visitied[u] = True
-    if u in network:
-        for v in network[u]:
-            if visitied[v] == False:
-                dfs(v)
+def dfs(r):
+    visited[r] = True
+    for i in network[r]:
+        if not visited[i]:
+            dfs(i)
 
 dfs(1)
-
-print(visitied.count(True)-1)
+print(sum(visited)-1)

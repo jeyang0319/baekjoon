@@ -6,9 +6,7 @@ sys.setrecursionlimit(10**6)
 n = int(sys.stdin.readline().rstrip())
 graph = []
 s = []
-global cnt
 cnt = 1
-
 def dfs(x, y):
     dx = [-1, 1, 0, 0]
     dy = [0, 0, -1, 1]
